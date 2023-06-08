@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "name": "yash",
+      "status": "Employee",
+      "salary": "10000",
+      "id": 1
+    },
+    {
+      "name": "Abhishek singh",
+      "status": "Employee",
+      "salary": "10000",
+      "id": 3
+    },
+    {
+      "id": "6",
+      "name": "yash",
+      "status": "Employee",
+      "salary": "10000"
+    },
+    {
+      "name": "Pandey Chandramol ",
+      "status": "owner",
+      "salary": "5647567",
+      "id": "11"
+    },
+    {
+      "id": "2",
+      "name": "Dhruv Makadiya",
+      "status": "Employee",
+      "salary": "10000"
+    }
+  ]
+}
