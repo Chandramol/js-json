@@ -59,7 +59,7 @@ submit.addEventListener("click", () => {
 const editBtn = (id) => {
   submit.style.display = "none";
   save.style.display = "inline-block";
-  idIn.style.display="none";
+  idIn.disabled=true;
 
   fetch(`http://localhost:3000/users/${id}`, {
     method: "GET",
