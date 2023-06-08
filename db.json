@@ -1,18 +1,6 @@
 {
   "users": [
     {
-      "name": "yash",
-      "status": "Employee",
-      "salary": "10000",
-      "id": 1
-    },
-    {
-      "name": "Abhishek singh",
-      "status": "Employee",
-      "salary": "10000",
-      "id": 3
-    },
-    {
       "id": "6",
       "name": "yash",
       "status": "Employee",
@@ -29,6 +17,12 @@
       "name": "Dhruv Makadiya",
       "status": "Employee",
       "salary": "10000"
+    },
+    {
+      "id": "7",
+      "name": "Ketan sir",
+      "status": "Employee",
+      "salary": "100000"
     }
   ]
 }

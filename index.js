@@ -1,11 +1,11 @@
 let tbody = document.getElementById("tbody");
 
-//Fetch from json server
+// show data on table
 fetch("http://localhost:3000/users")
   .then((res) => res.json())
   .then((json) => {
     console.log(json);
-    json.map((value) => {
+    json.forEach((value) => {
       let data = document.createElement("tr");
       data.innerHTML = `
             <tr>
@@ -15,111 +15,108 @@ fetch("http://localhost:3000/users")
                 <td>${value.salary}</td>
                 <td>
                     <button class="btn btn-warning" onclick="editBtn(${value.id})">Edit</button>
-                    <button class="btn btn-warning" onclick="deleteBtn(${value.id})">Delete</button>
+                    <button class="btn btn-danger" onclick="deleteBtn(${value.id})">Delete</button>
                 </td>
             </tr>
         `;
       tbody.append(data);
     });
-    // return data;
   });
 
-// Insert data to json server
-let idInput = document.getElementById("id");
-let nameInput = document.getElementById("name");
-let statusInput = document.getElementById("status");
-let salaryInput = document.getElementById("salary");
+// To Add data in json server
+let idIn = document.getElementById("id");
+let nameIn = document.getElementById("name");
+let statusIn = document.getElementById("status");
+let salaryIn = document.getElementById("salary");
 
 let submit = document.getElementById("submit");
 
-submit.addEventListener("click", function () {
-  let dataToJson = {
-    id: idInput.value,
-    name: nameInput.value,
-    status: statusInput.value,
-    salary: salaryInput.value,
+submit.addEventListener("click", () => {
+  let dataOfjson = {
+    id: idIn.value,
+    name: nameIn.value,
+    status: statusIn.value,
+    salary: salaryIn.value,
   };
 
   fetch("http://localhost:3000/users", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "content-Type": "application/json",
     },
-    body: JSON.stringify(dataToJson),
+    body: JSON.stringify(dataOfjson),
   })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data, "created");
+    .then((res) => res.jason())
+    .then((value) => {
+      console.log(value);
     })
     .catch((err) => {
-      console.log("Fail to submit to json server", err);
+      console.log("Not success to submit", err);
     });
 });
 
-//Edit to data
-function editBtn(id) {
-    submit.style.display="none";
-    idInput.style.display="none";
-    save.style.display="inline-block";
+// To Edit the data
+const editBtn = (id) => {
+  submit.style.display = "none";
+  save.style.display = "inline-block";
+  idIn.style.display="none";
+
   fetch(`http://localhost:3000/users/${id}`, {
     method: "GET",
-    header: {
+    headers: {
       "content-Type": "application/json",
     },
   })
     .then((res) => res.json())
-    .then((json) => {
-      idInput.value = json.id;
-      nameInput.value = json.name;
-      statusInput.value = json.status;
-      salaryInput.value = json.salary;
+    .then((value) => {
+      (idIn.value = value.id),
+        (nameIn.value = value.name),
+        (statusIn.value = value.status),
+        (salaryIn.value = value.salary);
+    })
+    .catch((error) => {
+      console.log(error);
     });
-}
-// After click on edit save data to json server
+};
+// To save this data
 let save = document.getElementById("save");
+save.onclick = function () {
+    save.style.display="none";
+    submit.style.display="inlie-block";
 
-save.addEventListener("click", function () {
-    submit.style.display="block";
-  let dataToJson = {
-    name: nameInput.value,
-    status: statusInput.value,
-    salary: salaryInput.value,
+  let dataOfjson = {
+    id: idIn.value,
+    name: nameIn.value,
+    status: statusIn.value,
+    salary: salaryIn.value,
   };
-  
-   let id = idInput.value;
+  let id=idIn.value;
 
   fetch(`http://localhost:3000/users/${id}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(dataToJson),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data, "Saved data to json server");
-    })
-    .catch((err) => {
-      console.log("Fail to submit to json server", err);
-    });
-});
-
-//Delete data from json server
-function deleteBtn(id) {
-  fetch(`http://localhost:3000/users/${id}`, {
-    method: "DELETE",
-    header: {
       "content-Type": "application/json",
     },
+    body: JSON.stringify(dataOfjson),
   })
-    .then((res) => {
-      if (res.ok) {
-        console.log("You deleted data successfully");
-      } else {
-        throw Error("Not success");
-      }
-    })
-    .catch((err) => {
-      console.log("not deleted", err);
+    .then((res) => res.jason())
+    .then((value) => {
+      console.log(value);
     });
-}
+};
+
+// To Delete the data
+const deleteBtn = (id) => {
+  fetch(`http://localhost:3000/users/${id}`, {
+    method: "DELETE",
+    headers: {
+      "content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (res.ok) {
+      console.log("Deleted SuccessFully...");
+    } else {
+      throw Error("Fail to Delete data");
+    }
+  });
+};
